@@ -3,12 +3,20 @@ import IPoint from 'esri/geometry/Point';
 
 import {AppContext} from '../../contexts/AppContextProvider';
 
-import MapView from '../MapView/MapView';
+import {
+    MapView,
+    GldasChart,
+    BottomPanel,
+    
+} from '../index';
+
+import {GldasLayerName} from '../../types/index';
 import {UIConfig} from '../../AppConfig';
-import BottomPanel from '../BottomPanel/BottomPanel';
+
 import ChangeInStorageIndicator from '../ChangeStorageIndicator/ChangeStorageIndicator';
 
 import useGldasData from '../../hooks/useGldasData';
+import { getTimeExtent } from '../../services/GLDAS/gldas';
 
 
 interface Props{};
@@ -31,7 +39,7 @@ const App: React.FC<Props> = ({
     const { timeExtentForGldasLayers, isMobile} = React.useContext(AppContext);
 
     //const [loadingState, setLoadingState] = React.useState<LoadingState>({isLoading:true});
-
+    const [ activeLayer, setActiveLayer] = React.useState<GldasLayerName>('Soil Moisture');
     const [selectedTmeExtendItem, setSelectedTimeExtendItem] = React.useState<TimeExtentItem>();
 
     const [previewTimeExtentItem, setPreviewTimeExtendItem] = React.useState<TimeExtentItem>();
@@ -73,6 +81,18 @@ const App: React.FC<Props> = ({
                 data={gldasData} 
                 gldasDataByMonth={gldasDataByMonth}
                 timeExtentItem={previewTimeExtentItem || selectedTmeExtendItem}/>
+
+                <GldasChart
+                    data={gldasData}
+                    timeExtent={timeExtentForGldasLayers}
+                    activeLayer={activeLayer}
+
+                    selectedTimeExtentItem={selectedTmeExtendItem}
+                    previewTimeExtentItem={previewTimeExtentItem}
+
+                    selectedItemOnChange={setSelectedTimeExtendItem}
+                    previewItemOnChange={setPreviewTimeExtendItem}
+                />
             </BottomPanel>
         );
     };
