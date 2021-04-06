@@ -15,7 +15,7 @@ import SvgContainer, {
 } from './SvgContainer';
 
 import { UIConfig} from '../../AppConfig';
-import { remove } from 'esri/views/3d/externalRenderers';
+
 
 const AreaPathClassName = 'water-stroge-path-group';
 

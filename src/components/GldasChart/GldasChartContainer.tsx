@@ -21,6 +21,9 @@ import StackedArea from './StackedArea';
 import {
     TimeExtentItem
 } from '../App/App';
+import AppContextProvider from '../../contexts/AppContextProvider';
+import Bar from './Bar';
+import Line from './Line';
 
 
 
@@ -124,6 +127,17 @@ const GldasChartContainer: React.FC<Props> = ({
             : data.Evapotranspiration;
     };
 
+    const getDataForLines = ()=> {
+
+        if(!data || ChartTypeLookup[activeLayer] !== 'Water Flux'){
+            return null;
+        }
+
+        return (activeLayer === 'Precipitation' || activeLayer === 'Runoff')
+            ? data.Runoff
+            : data.Evapotranspiration;
+    };
+
     return (
         <GldasChartContainerDiv>
             <Header activeLayer={activeLayer}/>
@@ -131,10 +145,18 @@ const GldasChartContainer: React.FC<Props> = ({
                 timeExtent={timeExtent}
                 yDomain={getYDomain()}
             >
-                <Axis />
                 <StackedArea 
                     data={getDataForStackedArea()}
                 />
+                
+                <Bar
+                    data={getDataForBar()}
+                    isDiverging={activeLayer === 'Change in Storage'}
+                />
+                <Line
+                    data={getDataForLines()}
+                />
+                <Axis />
 
             </SvgContainer>
             

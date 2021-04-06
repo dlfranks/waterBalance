@@ -17,6 +17,8 @@ import ChangeInStorageIndicator from '../ChangeStorageIndicator/ChangeStorageInd
 
 import useGldasData from '../../hooks/useGldasData';
 import { getTimeExtent } from '../../services/GLDAS/gldas';
+import MonthlyTrendChart from '../MontlyTrendChart/MonthlytrendChartContainer';
+import SummaryCard from '../SummaryCard/SummaryCard';
 
 
 interface Props{};
@@ -81,7 +83,7 @@ const App: React.FC<Props> = ({
                 data={gldasData} 
                 gldasDataByMonth={gldasDataByMonth}
                 timeExtentItem={previewTimeExtentItem || selectedTmeExtendItem}/>
-
+                <SummaryCard></SummaryCard>
                 <GldasChart
                     data={gldasData}
                     timeExtent={timeExtentForGldasLayers}
@@ -93,6 +95,7 @@ const App: React.FC<Props> = ({
                     selectedItemOnChange={setSelectedTimeExtendItem}
                     previewItemOnChange={setPreviewTimeExtendItem}
                 />
+                <MonthlyTrendChart></MonthlyTrendChart>
             </BottomPanel>
         );
     };

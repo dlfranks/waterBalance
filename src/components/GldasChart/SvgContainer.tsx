@@ -9,7 +9,7 @@ import {
 } from 'd3';
 import useWindowSize from '../../hooks/useWindowSize';
 import { HeaderHeight } from './Header';
-import { MultiCompiler, SourceMapDevToolPlugin } from 'webpack';
+
 
 const margin = {
     top: 20,
