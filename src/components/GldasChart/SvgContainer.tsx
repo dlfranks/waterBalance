@@ -81,7 +81,7 @@ const SvgContainer:React.FC<Props> = ({
                 .attr('height', height + margin.top + margin.bottom)
             .append('g')
                 .attr(
-                    'transfor',
+                    'transform',
                     `translate(${margin.left}, ${margin.top})`
                 );
 

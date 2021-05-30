@@ -48,7 +48,7 @@ const GldasChartContainerDiv = styled.div`
     flex-grow: 1l
     flex-shrink: 1;
     /* flex-basis: 600px;*/
-    flex: autol;
+    flex: auto;
     height: 100%;
 `;
 
